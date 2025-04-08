@@ -24,7 +24,12 @@ npm run dev
 OR 
 
 ### Running Docker container
-1. Build and start the Docker container using :
+1. Create a .env file in the root directory, and fill it with the following :
+```
+DATABASE_URL="file:./dev.db"
+```
+
+2. Build and start the Docker container using :
 ```bash
 docker-compose up
 ```
