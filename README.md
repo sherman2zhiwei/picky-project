@@ -11,7 +11,12 @@ npx prisma generate
 npx prisma db push
 ```
 
-3. Start dev server : 
+3. Create a .env file in the root directory, and fill it with the following :
+```
+DATABASE_URL="file:./dev.db"
+```
+
+4. Start dev server : 
 ```bash
 npm run dev
 ```
