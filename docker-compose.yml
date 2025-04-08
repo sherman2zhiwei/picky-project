@@ -12,17 +12,8 @@ services:
       - ./:/app
       # Don't mount node_modules - use container's version
       - /app/node_modules
-      # Don't mount .next folder - let it be built inside the container
+      # Don't mount .next and prisma folder - let it be built inside the container
       - /app/.next
-      # Persist sqlite db and image uploads
-      - sqlite-data:/app/prisma
-      - image-uploads:/app/public/uploads
+      - /app/prisma
     env_file:
       - .env
-    # command: npm run dev
-
-volumes:
-  sqlite-data:
-    driver: local
-  image-uploads:
-    driver: local

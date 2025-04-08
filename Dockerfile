@@ -9,6 +9,7 @@ COPY . .
 
 # Build the application
 RUN npx prisma generate
+RUN npx prisma db push
 
 EXPOSE 3000
 
