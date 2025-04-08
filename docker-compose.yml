@@ -1,14 +1,28 @@
 version: '3'
 
 services:
-  nextjs:
-    build: 
+  nextjs-dev:
+    build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    restart: always
-    # Add environment variables if needed
-    # environment:
-    #   - DATABASE_URL=postgres://user:password@postgres:5432/dbname
-    #   - NEXT_PUBLIC_API_URL=https://api.example.com
+    volumes:
+      # Mount the source code into the container for hot reloading
+      - ./:/app
+      # Don't mount node_modules - use container's version
+      - /app/node_modules
+      # Don't mount .next folder - let it be built inside the container
+      - /app/.next
+      # Persist sqlite db and image uploads
+      - sqlite-data:/app/prisma
+      - image-uploads:/app/public/uploads
+    env_file:
+      - .env
+    # command: npm run dev
+
+volumes:
+  sqlite-data:
+    driver: local
+  image-uploads:
+    driver: local
